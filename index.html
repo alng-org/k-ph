@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0
+                               minimum-scale=1.0 maximum-scale=1.0 user-scalable=no"/>
+    -->
+    
+    <script>
+        function color_span(s,color){
+            let span = document.createElement("span");
+            span.style.color=color;
+            span.append(s);
+            return span;
+        }
+        function  is_overflow(target){
+            return target.scrollWidth > document.body.clientWidth;
+        }
+        function content(target,str){
+            for( let s of str.match(/[A-Z]+|[^A-Z]+/g) ){
+                if( /^[A-Z]+$/.test(s) ){
+                    target.append(
+                        color_span(s,"crimson")
+                    );
+                }else{
+                    target.append(
+                        color_span(s,"blueviolet")
+                    );
+                }
+            }
+        }
+        function view(str){
+            let target = document.getElementById("k-ph");
+            target.innerHTML = "";
+            content(target,str);
+            style();
+        }
+        function style(){
+            let target = document.getElementById("k-ph");
+            if(is_overflow(target)){
+                target.className = "overflow";
+                target.style.setProperty("animation-duration",`${target.innerText.length/2}s`);
+            }else{
+                target.className = "contain";
+            }
+        }
+        
+        function select(ls){
+            return ls[
+                Math.floor(
+                    ls.length * Math.random()
+                )
+            ];
+        }
+
+        function background(position){
+            let target = document.body;
+            target.style.setProperty(
+                "background-image",
+                `url("./${position}.jpg")`
+            );
+            target.style.setProperty(
+                "background-position",
+                position
+            );
+        }
+    
+        function init(){
+            background(
+                select(
+                    position()
+                )
+            );
+            view(
+                select(
+                    statement()
+                )
+            );
+        }
+
+    </script>
+    <script src="./config.js"></script>
+    <style>
+        .contain{
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .overflow{
+            
+            
+            animation-name: k_ph;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+        @keyframes k_ph {
+            from{
+                left:100%;
+                transform: translate(0%,-50%);
+            }
+            to {
+                left:0%;
+                transform: translate(-100%,-50%);
+            }
+            
+        }
+    </style>
+</head>
+<body style="
+height: 100vh;
+width: 100vw;
+overflow: hidden;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+"
+onload="init()";
+onresize="style();"
+>
+    <div id = "k-ph"
+        style="position: fixed;
+               top: 50%;
+               transform-box: view-box;
+               font-weight: bolder;
+               font-size: 3rem;
+               opacity: 0.5;
+               color: burlywood;
+               user-select: none;
+               white-space: pre;">
+       FOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOf
+</div>
+</body>
+</html>
