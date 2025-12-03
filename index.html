@@ -55,14 +55,19 @@
 
         function background(position){
             let target = document.body;
-            target.style.setProperty(
-                "background-image",
-                `url("./${position}.jpg")`
-            );
-            target.style.setProperty(
-                "background-position",
-                position
-            );
+            let url = `./${position}.jpg`;
+            let img = new Image();
+            img.onload = ()=>{
+                target.style.setProperty(
+                    "background-image",
+                    `url(${url})`
+                );
+                target.style.setProperty(
+                    "background-position",
+                    position
+                );
+            };
+            image.src = url;
         }
     
         function init(){
@@ -113,6 +118,7 @@ overflow: hidden;
 background-size: cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
+transition:all ease 3s;
 "
 onload="init()";
 onresize="style();"
@@ -131,4 +137,5 @@ onresize="style();"
 </div>
 </body>
 </html>
+
 
