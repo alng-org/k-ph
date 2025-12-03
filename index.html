@@ -55,19 +55,23 @@
 
         function background(position){
             let target = document.body;
-            let url = `./${position}.jpg`;
-            let img = new Image();
-            img.onload = ()=>{
+            let furl = (t) => `./${position}.${t}`;
+            let fbg_img = (t) => {
                 target.style.setProperty(
                     "background-image",
-                    `url(${url})`
-                );
-                target.style.setProperty(
-                    "background-position",
-                    position
+                    `url(${furl(t)})`
                 );
             };
-            img.src = url;
+            fbg_img("webp");
+            target.style.setProperty(
+                "background-position",
+                position
+            );
+            let img = new Image();
+            img.onload = ()=>{
+                fbg_img("jpg");
+            };
+            img.src = furl("jpg");
         }
     
         function init(){
@@ -91,12 +95,7 @@
             transform: translate(-50%,-50%);
         }
         .overflow{
-            
-            
-            animation-name: k_ph;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-            animation-fill-mode: forwards;
+            animation: k_ph infinite linear forwards;
         }
         @keyframes k_ph {
             from{
@@ -106,20 +105,24 @@
             to {
                 left:0%;
                 transform: translate(-100%,-50%);
-            }
-            
+            }   
+        }
+
+        body{
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
         }
     </style>
 </head>
-<body style="
-height: 100vh;
-width: 100vw;
-overflow: hidden;
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
-transition:all ease 3s;
-"
+<body
 onload="init()";
 onresize="style();"
 >
@@ -137,6 +140,7 @@ onresize="style();"
 </div>
 </body>
 </html>
+
 
 
 
