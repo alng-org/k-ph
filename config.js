@@ -1,7 +1,8 @@
 function statement(){
     return  [
         "White is White, Not Black",
-        "What you found is what you think"
+        "What you found is what you think",
+        "Reading open a World, but Traveling into the World."
     ];
 }
 function position(){
@@ -17,4 +18,5 @@ function position(){
         "top",
         "top left"
     ];
+
 }
