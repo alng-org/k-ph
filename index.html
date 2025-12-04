@@ -59,7 +59,7 @@
             let fbg_img = (t) => {
                 target.style.setProperty(
                     "background-image",
-                    `url(${furl(t)})`
+                    `url("${furl(t)}")`
                 );
             };
             fbg_img("webp");
@@ -159,6 +159,7 @@ onresize="style();"
 </div>
 </body>
 </html>
+
 
 
 
