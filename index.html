@@ -94,6 +94,17 @@
     </script>
     <script src="./config.js"></script>
     <style>
+        #k-ph{
+            position: fixed;
+            top: 50%;
+            transform-box: view-box;
+            font-weight: bolder;
+            font-size: 3rem;
+            opacity: 0.5;
+            color: burlywood;
+            user-select: none;
+            white-space: pre;
+        }
         .contain{
             left: 50%;
             transform: translate(-50%,-50%);
@@ -128,6 +139,7 @@
             animation-timing-function: ease-in-out;
             animation-fill-mode: forwards;
         }
+        
         @keyframes switch_background{
             from{
                 
@@ -145,20 +157,12 @@
 onload="init()";
 onresize="style();"
 >
-    <div id = "k-ph"
-        style="position: fixed;
-               top: 50%;
-               transform-box: view-box;
-               font-weight: bolder;
-               font-size: 3rem;
-               opacity: 0.5;
-               color: burlywood;
-               user-select: none;
-               white-space: pre;">
-       Waiting....
-</div>
+    <div id = "k-ph">
+        Waiting....
+    </div>
 </body>
 </html>
+
 
 
 
