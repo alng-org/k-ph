@@ -64,7 +64,7 @@
                 "background-position",
                 position
             );
-            let img = document.getElementbyId("bg");
+            let img = document.getElementById("bg");
             img.src = furl("jpg");
             img.style.setProperty(
                 "object-position",
@@ -73,7 +73,7 @@
         }
         function switch_bg(){
             let target = document.body;
-            let img = document.getElementbyId("bg");
+            let img = document.getElementById("bg");
             target.addEventListener(
                 'animationend',
                 (e)=>{
@@ -193,6 +193,7 @@ onresize="style();"
     </div>
 </body>
 </html>
+
 
 
 
