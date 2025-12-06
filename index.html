@@ -80,7 +80,7 @@
                     requestAnimationFrame(
                         ()=>{
                             img.style.visibility="visible";
-                            target.style.backgroundImage = 'none';
+                            //target.style.backgroundImage = 'none';
                             img.className="transfer-in";
                         }
                     );
@@ -181,14 +181,11 @@
                 transform: translate(-100%,-50%);
             }   
         }
-        html,body{
-            overscroll-behavior: none;
-            overflow: hidden;
-        }
         body{
             margin: 0;
             height: 100dvh;
             width: 100dvw;
+            overflow: hidden;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -243,6 +240,7 @@ onresize="style();"
     </div>
 </body>
 </html>
+
 
 
 
