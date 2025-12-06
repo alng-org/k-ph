@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0
                                minimum-scale=1.0 maximum-scale=1.0 user-scalable=no"/>
+    -->
     
     <script>
         function color_span(s,color){
@@ -107,7 +109,7 @@
     <script src="./config.js"></script>
     <style>
         #k-ph{
-            position: fixed;
+            position: absolute;
             top: 50%;
             transform-box: view-box;
             font-weight: bolder;
@@ -147,7 +149,9 @@
             background-attachment: fixed;
         }
         #bg{
-            position: fixed;
+            position: absolute;
+            left:0;
+            top:0;
             height: 100vh;
             width: 100vw;
             overflow:hidden;
@@ -195,6 +199,7 @@ onresize="style();"
     </div>
 </body>
 </html>
+
 
 
 
