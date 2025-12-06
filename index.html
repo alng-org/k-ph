@@ -95,6 +95,12 @@
             let img = document.getElementById("bg");
             img.src = img.src.replace(/^(.+)jpg$/,"$1webp");
             //fallback into loaded webp
+            img.addEventListener(
+                "contextmenu",
+                (e)=>alert(
+                    "Failed to load original JPG photo; fell back to loaded WebP photo."
+                )
+            );
         }
         function init(){
             background(
@@ -180,6 +186,7 @@
             height: 100dvh;
             width: 100dvw;
             overflow: hidden;
+            overscroll-behavior: none;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -234,6 +241,7 @@ onresize="style();"
     </div>
 </body>
 </html>
+
 
 
 
