@@ -7,9 +7,9 @@
     
     
     <script>
-        function color_span(s,color){
+        function style_span(s,clazz){
             let span = document.createElement("span");
-            span.style.color=color;
+            span.className = clazz;
             span.append(s);
             return span;
         }
@@ -20,11 +20,11 @@
             for( let s of str.match(/[A-Z]+|[^A-Z]+/g) ){
                 if( /^[A-Z]+$/.test(s) ){
                     target.append(
-                        color_span(s,"crimson")
+                        style_span(s,"important")
                     );
                 }else{
                     target.append(
-                        color_span(s,"blueviolet")
+                        style_span(s,"normal")
                     );
                 }
             }
@@ -91,7 +91,11 @@
             );
             target.className="transfer-out";
         }
-    
+        function fallback_bg(){
+            let img = document.getElementById("bg");
+            img.src = img.src.replace(/^(.+)jpg$/,"$1webp");
+            //fallback into loaded webp
+        }
         function init(){
             background(
                 select(
@@ -108,6 +112,38 @@
     </script>
     <script src="./config.js"></script>
     <style>
+        .important{
+            animation-name: impo;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-duration:10s;
+            animation-direction: alternate;
+            animation-fill-mode: both;
+        }
+        @keyframes impo{
+            from,25%{
+                color:crimson;
+            }
+            75%,to{
+                color:peachpuff;
+            }
+        }
+        .normal{
+            animation-name: norm;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-duration:10s;
+            animation-direction: alternate;
+            animation-fill-mode: both;
+        }
+        @keyframes norm{
+            from,25%{
+                color:blueviole;
+            }
+            75%,to{
+                color: yellow!
+            }
+        }
         #k-ph{
             position: fixed;
             top: 50%;
@@ -192,12 +228,13 @@ class="transfer"
 onload="init()";
 onresize="style();"
 >
-    <img id ="bg" onload="switch_bg()">
+    <img id ="bg" onload="switch_bg()" onerror="fallback_bg()">
     <div id = "k-ph">
         Waiting....
     </div>
 </body>
 </html>
+
 
 
 
