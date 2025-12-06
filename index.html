@@ -77,8 +77,12 @@
             target.addEventListener(
                 'animationend',
                 (e)=>{
-                    img.style.visibility="visible";
-                    target.style.backgroundImage = 'none';
+                    requestAnimationFrame(
+                        ()=>{
+                            img.style.visibility="visible";
+                            target.style.backgroundImage = 'none';
+                        }
+                    );
                     img.className="transfer-in";
                 },
                 {
@@ -193,6 +197,7 @@ onresize="style();"
     </div>
 </body>
 </html>
+
 
 
 
