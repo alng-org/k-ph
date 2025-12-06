@@ -54,28 +54,38 @@
         }
 
         function background(position){
-            let target = document.body;
             let furl = (t) => `./${position}.${t}`;
-            let fbg_img = (t) => {
-                target.style.setProperty(
-                    "background-image",
-                    `url("${furl(t)}")`
-                );
-            };
-            fbg_img("webp");
+            let target = document.body;
+            target.style.setProperty(
+                "background-image",
+                `url("${furl("webp")}")`
+            );
             target.style.setProperty(
                 "background-position",
                 position
             );
-            let img = new Image();
-            img.onload = ()=>{
-                fbg_img("jpg");
-                target.style.setProperty(
-                    "animation-name",
-                    "switch_background"
-                );
-            };
+            let img = document.getElementbyId("bg");
             img.src = furl("jpg");
+            img.style.setProperty(
+                "object-position",
+                position
+            );
+        }
+        function switch_bg(){
+            let target = document.body;
+            let img = document.getElementbyId("bg");
+            target.addEventListener(
+                'animationend',
+                (e)=>{
+                    img.style.visibility="visible";
+                    target.style.backgroundImage = 'none';
+                    img.className="transfer-in";
+                },
+                {
+                    once: true
+                }
+            );
+            target.className="transfer-out";
         }
     
         function init(){
@@ -125,7 +135,6 @@
                 transform: translate(-100%,-50%);
             }   
         }
-
         body{
             margin: 0;
             height: 100vh;
@@ -134,34 +143,57 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-
-            animation-duration: 5s;
-            animation-timing-function: ease-in-out;
+        }
+        #bg{
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            overflow:hidden;
+            object-fit:cover;
+            visibility:hidden;
+        }
+        .transfer-out{
+            animation-name: tr-out;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in;
             animation-fill-mode: forwards;
         }
-        
-        @keyframes switch_background{
+        @keyframes tr-out{
             from{
-                
-            }
-            50%{
-                backdrop-filter:blur(10%);
+                backdrop-filter:blur(0px);
             }
             to{
-                
+                backdrop-filter:blur(10px);
             }
         }
+        .transfer-in{
+            animation-name: tr-in;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+        }
+        @keyframes tr-in{
+            from{
+                filter:blur(10px);
+            }
+            to{
+                filter:blur(0px);
+            }
+        }    
     </style>
 </head>
 <body
+class="transfer"
 onload="init()";
 onresize="style();"
 >
+    <img id ="bg" onload="switch_bg()">
     <div id = "k-ph">
         Waiting....
     </div>
 </body>
 </html>
+
 
 
 
