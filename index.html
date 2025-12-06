@@ -80,6 +80,9 @@
                     requestAnimationFrame(
                         ()=>{
                             img.style.visibility="visible";
+                            //​Android Chrome destroys the old layer 
+                            //before the new layer is completely ready for display, 
+                            //which causes the insertion of a safety frame.
                             //target.style.backgroundImage = 'none';
                             img.className="transfer-in";
                         }
@@ -93,14 +96,21 @@
         }
         function fallback_bg(){
             let img = document.getElementById("bg");
-            img.src = img.src.replace(/^(.+)jpg$/,"$1webp");
-            //fallback into loaded webp
-            img.addEventListener(
-                "contextmenu",
-                (e)=>alert(
-                    "Failed to load original JPG photo; fell back to loaded WebP photo."
-                )
-            );
+            if(/^(.+)jpg$/.test(img.src)){
+                img.src = img.src.replace(/^(.+)jpg$/,"$1webp");
+                //fell back to loaded webp
+                img.addEventListener(
+                    "contextmenu",
+                    (e)=>alert(
+                        "Failed to load original JPG photo; fell back to loaded WebP photo."
+                    )
+                );
+            }else{
+                img.src="";
+                alert(
+                    "Reconnect to the internet, or enable cache if you already see a background."
+                );
+            }
         }
         function init(){
             background(
@@ -131,7 +141,7 @@
                 color: crimson;
             }
             75%,to{
-                color: peachpuff;
+                color: yellow;
             }
         }
         .normal{
@@ -147,7 +157,7 @@
                 color: blueviolet;
             }
             75%,to{
-                color: yellow;
+                color: skyblue;
             }
         }
         #k-ph{
@@ -235,11 +245,10 @@ onload="init()";
 onresize="style();"
 >
     <img id ="bg" onload="switch_bg()" onerror="fallback_bg()">
-    <div id = "k-ph">
-        Waiting....
-    </div>
+    <div id = "k-ph"></div>
 </body>
 </html>
+
 
 
 
